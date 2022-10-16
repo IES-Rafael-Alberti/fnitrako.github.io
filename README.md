@@ -2,6 +2,6 @@
 
 
 ## Proyecto 1
-### Bastionado UEFI
+ ### Bastionado UEFI
 
-### Bastionado GRUB
+ ### Bastionado GRUB
