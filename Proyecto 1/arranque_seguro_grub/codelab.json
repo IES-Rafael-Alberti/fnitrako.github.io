@@ -3,12 +3,12 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2022-10-14T19:39:35+02:00",
-  "id": "arranque",
+  "updated": "2022-10-16T18:08:56+02:00",
+  "id": "arranque_seguro_grub",
   "duration": 0,
   "title": "Arranque seguro de un sistema Linux",
   "summary": "Arranque seguro de un Linux",
-  "source": "arranque_seguro.md",
+  "source": "arranque_seguro_grub.md",
   "theme": "",
   "status": [
     "published"
@@ -20,5 +20,5 @@
   "tags": [
     "web"
   ],
-  "url": "arranque"
+  "url": "arranque_seguro_grub"
 }

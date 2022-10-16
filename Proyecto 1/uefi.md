@@ -7,6 +7,10 @@ status: Published
 
 # Bastionado de la UEFI (E16UKAMS.102) incorporada en la placa (MS-16UK)
 
+## Modelo y versión de la UEFI a bastionar y su placa base
+
+![placa](img/fotoplaca.png)
+
 ## Contraseña de administración de la UEFI
 
 Activaremos esta opción si queremos que el equipo nos solicite una contraseña para modificar los parámetros de la UEFI.

@@ -1,6 +1,6 @@
 author: Francisco Javier García Cordero
 summary: Arranque seguro de un Linux
-id: arranque
+id: arranque_seguro_grub
 categories: codelab,markdown
 environments: Web
 status: Published
