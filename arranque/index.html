@@ -1,0 +1,99 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Arranque seguro de un sistema Linux</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="arranque"
+                  title="Arranque seguro de un sistema Linux"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Editar permisos" duration="0">
+        <p> El primer paso que podriamos dar para asegurar el arranque de nuestro sistema es editar los permisos de los archivos de configuración de GRUB para que solo los pueda editar root. Dejo un ejemplo a continuación.<br><br>  </p>
+<p class="image-container"><img alt="permisos" src="img\\baf61296456371b7.png">    </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Proteger arranque con contraseña" duration="0">
+        <p> Para proteger el arranque de nuestro sistema con una contraseña podemos editar e archivo: <strong>&#34;/etc/grub.d/40_custom&#34;</strong>, y luego aplicar los cambios ejecutando <strong>update-grub  </strong></p>
+<p class="image-container"><img alt="nano_arranque" src="img\\3a97e047cd42d693.png"><br><br><img alt="contraseña_arranque" src="img\\bc5cb01e23ebe0be.png"><br><br><img alt="update_grub" src="img\\8f493fab75ef750e.png">    </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Cifrar la contraseña" duration="0">
+        <p> Para cifrar la contraseña tenemos que ejecutar el comando <strong>&#34;sudo grub-mkpasswd-pbkdf2&#34;</strong> y editar el achivo <strong>&#34;/etc/grub.d/40_custom&#34;</strong> añadiendo la contraseña cifrada y cambiando la palabra <strong>password</strong> por <strong>password_pbkdf2</strong>.<br><br>  <img alt="cifrar-pass" src="img\\27c8a3edee5f2a0e.png"><br><br><img alt="archivo-40" src="img\\11825e922ba04112.png"><br><br><img alt="archivo-40-2" src="img\\1de7bda6d11c40c9.png">   </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Ocultar el menú de GRUB" duration="0">
+        <p> Para ocultar el menú de GRUB que nos sale al arrancar nuestro sistema seguiremos los siguientes pasos (siendo root):<br><br>  Editamos el archivo <strong>/etc/default/grub</strong><img alt="nano-grub" src="img\\fcbec6c2841c1a3f.png"><br><br> Cambiamos GRUB_TIMEOUT=5 a GRUB_TIMEOUT=0 <img alt="timeout" src="img\\f6b55e707254eac8.png"><br><br> Ejecutamos &#34;update-grub&#34;  </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Copia de seguridad de la configuración de arranque" duration="0">
+        <p> Para realizar una copia de seguridad de la configuracion del arranque de nuestro sistema diferenciaremos dos pasos, aunque para realizar la copia en si solo necesitamos realizar el paso 1, para una restauración completa de GRUB deberemos realizar los dos pasos.  </p>
+<h2 is-upgraded>1.Copiar archivos </h2>
+<p> Tenemos que copiar tres archivos:<br> El archivo <strong>&#34;/etc/default/grub&#34;<br></strong> El directorio <strong>&#34;/etc/grub.d/&#34;</strong> (y todos los archivos/scripts que contiene)<br> El archivo <strong>&#34;/boot/grub/grub.cfg&#34;  </strong></p>
+<h2 is-upgraded>2.Reinstalar GRUB </h2>
+<p> Voy a explicar dos métodos para reinstalar GRUB:<br>  </p>
+<ol type="1">
+<li>Con un &#34;LiveCD&#34; de Linux, que consiste en usar una distribución en modo LiveCD para instalar nuevamente el GRUB2, usaremos el LiveCD de cualquier distribución que use GRUB2 como gestor de arranque y no Lilo y GRUB1 (por ejemplo, Ubuntu 10.04, Mint8 o Mint9, Guadalinex V7,etc)   <ul>
+<li>Un vez dentro del sistema LiveCD, ejecutaremos el comando &#34;fdisk -l&#34; en una terminal para ver las particiones de los distintos discos duros. </li>
+<li>Despues vemos cual es la partición donde tenemos Linux y la montamos en &#34;/mnt&#34; (normalmente esa partición será &#34;sda1&#34;), por ejemplo: <strong>sudo mount /dev/sda1 /mnt</strong></li>
+<li>Si tienes la /boot en partición independiente, despues de montar el sistema de archivos en /mnt (sudo mount /dev/sda1 /mnt), debes montar también la partición /boot con el siguiente comando: <strong>sudo mount /dev/sda2 /mnt/boot</strong></li>
+<li>Ahora montamos el resto de dispositivos: <strong>sudo mount –bind /dev /mnt/dev</strong></li>
+<li>Ejecutamos el comando chroot de forma que accedemos como root al sistema: <strong>sudo chroot /mnt</strong></li>
+<li>Por último cargamos GRUB en el MBR ejecutando el siguiente comando: <strong>grub-install –recheck /dev/sda</strong></li>
+<li>(sda lo debemos sustituir por el disco duro que utilicemos para arrancar nuestro sistema operativo, normalmente es <strong>sda</strong>, no poner el número de partición, solo <strong>sda</strong>) </li>
+<li>Reiniciamos y arrancamos desde el disco duro y no desde el LiveCD, podemos ajustar manualmente el menu de arranque pero lo haremos de forma automatica con el comando: <strong>sudo update-grub2</strong></li>
+<li>Si el comando <strong>update-grub2</strong> no te funciona, puede que tengas que instalar el paquete grub2 con el siguiente comando: <strong>sudo aptitude install grub2  </strong></li>
+</ul>
+</li>
+<li>Con <strong>Super Grub Disk</strong> (SGD), una aplicación que podemos encotran en &#34;http://www.supergrubdisk.org&#34;.   <ul>
+<li>Primero nos descargamos la iso de SGD y la grabamos en un CD o en pendrive booteable, reiniciamos y arrancamos desde el CD o el USB </li>
+<li>Elegiremos la primera opción &#34;Detec any SO&#34;, detectara el sistema instalado y mostrara el menu grub con el que arrancas </li>
+<li>Una vez arrancado el sistema operativo, abrimos un terminal para ejecutar lo siguiente: </li>
+<li><strong>sudo grub-mkconfig</strong> (este comando no hace nada, solo nos da una salida de como quedará el fichero grub.cfg) </li>
+<li><strong>sudo grub-install /dev/sda</strong> (cuidado!!, puede ser sda o hda, sdb, etc. Teneis que averiguar cuál es el vuestro) </li>
+<li><strong>sudo update-grub2</strong></li>
+<li><strong>sudo reboot</strong> y ya tenemos Grub2 sano y salvo </li>
+</ul>
+</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

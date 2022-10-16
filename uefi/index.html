@@ -1,0 +1,75 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Bastionado de la UEFI (E16UKAMS.102) incorporada en la placa (MS-16UK)</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="uefi"
+                  title="Bastionado de la UEFI (E16UKAMS.102) incorporada en la placa (MS-16UK)"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Contraseña de administración de la UEFI" duration="0">
+        <p> Activaremos esta opción si queremos que el equipo nos solicite una contraseña para modificar los parámetros de la UEFI. <img alt="admin" src="img\\ee10186430162aa8.bmp">  </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Contraseña de usuario de la UEFI" duration="0">
+        <p> Activaremos esta opción si queremos que el equipo nos solicite una contraseña para modificar los parámetros básicos de la UEFI. <img alt="usuario" src="img\\893c92813b7ec631.bmp">   </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Contraseña de arranque del dispositivo" duration="0">
+        <p> Activaremos esta opción si queremos que el equipo nos solicite un contraseña para poder arrancar. <img alt="disp" src="img\\c898eca8dfeeddf7.bmp">  </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Permiso para el arranque desde dispositivo USB" duration="0">
+        <p> Activaremos esta opción si queremos poder arrancar el equipo desde un dispositivo extraible a través del puerto USB, por defecto suele venir activada. <img alt="USB" src="img\\1ec4fe86cc93e930.bmp">  </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Orden de arranque" duration="0">
+        <p> Esta opción define el orden en el que se produce el arranque del sistema, es decir, cofiguramos si queremos que primero arranque desde el disco duro y luego pruebe los puertos USB, que compruebe primero USB y luego disco duro, etc. <img alt="orden" src="img\\51bbf219d1a5e4d7.bmp">  </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Secure Boot" duration="0">
+        <p> Esta opción deniega la ejecución en el arranque de software no firmado, en general, prohibe la ejecución de cualquier cosa que no sea Windows. <img alt="secure" src="img\\3a4e503a9b967768.bmp"></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

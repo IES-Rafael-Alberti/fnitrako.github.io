@@ -1,0 +1,24 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2022-10-14T19:39:35+02:00",
+  "id": "arranque",
+  "duration": 0,
+  "title": "Arranque seguro de un sistema Linux",
+  "summary": "Arranque seguro de un Linux",
+  "source": "arranque_seguro.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "codelab",
+    "markdown"
+  ],
+  "tags": [
+    "web"
+  ],
+  "url": "arranque"
+}
